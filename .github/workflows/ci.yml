@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze-and-test:
+    name: Analyze & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Print Flutter version
+        run: flutter --version
+
+      - name: Create .env files from example
+        run: |
+          cp .env.example .env.dev
+          cp .env.example .env.prod
+
+      - name: Generate platform folders
+        run: flutter create . --org com.example --project-name app_template
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run code generation
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Generate localizations
+        run: flutter gen-l10n
+
+      - name: Verify formatting
+        run: |
+          dart format --output=none --set-exit-if-changed $(find lib test \
+            -name '*.dart' \
+            -not -name '*.g.dart' \
+            -not -name '*.freezed.dart' \
+            -not -name '*.gen.dart' \
+            -not -path 'lib/l10n/app_localizations*')
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Test
+        run: flutter test

@@ -1,0 +1,74 @@
+{
+  "@@locale": "fa",
+
+  "appTitle": "قالب اپلیکیشن",
+
+  "tabHome": "خانه",
+  "tabProfile": "پروفایل",
+
+  "homeIntro": "نقطه شروعی همراه با همه‌چیز — Riverpod، GoRouter، Dio، Freezed، احراز هویت امن، چندزبانگی (انگلیسی + فارسی)، Sentry و PostHog. برای تازه‌سازی به پایین بکشید.",
+
+  "login": "ورود",
+  "signup": "ثبت‌نام",
+  "logout": "خروج",
+  "loginSuccess": "خوش آمدید!",
+  "email": "ایمیل",
+  "password": "رمز عبور",
+  "confirmPassword": "تکرار رمز عبور",
+  "forgotPassword": "رمز عبور را فراموش کرده‌اید؟",
+  "name": "نام",
+
+  "profile": "پروفایل",
+  "editProfile": "ویرایش پروفایل",
+  "settings": "تنظیمات",
+
+  "chooseLanguage": "زبان خود را انتخاب کنید",
+  "chooseLanguageSubtitle": "زبان مورد نظر خود را انتخاب کنید",
+
+  "chooseTheme": "تم خود را انتخاب کنید",
+  "chooseThemeSubtitle": "ظاهر پیش‌فرض را انتخاب کنید — هر زمان که خواستید می‌توانید آن را در تنظیمات تغییر دهید",
+  "themeLight": "روشن",
+  "themeDark": "تاریک",
+  "themeSystem": "سیستم",
+
+  "cancel": "لغو",
+
+  "discardChanges": "تغییرات نادیده گرفته شود؟",
+  "discardChangesBody": "تغییرات ذخیره‌نشده دارید. آیا مطمئن هستید که می‌خواهید بازگردید؟",
+  "keepEditing": "ادامه ویرایش",
+  "discard": "نادیده گرفتن",
+
+  "copiedToClipboard": "در کلیپ‌بورد کپی شد",
+
+  "takePhoto": "گرفتن عکس",
+  "useYourCamera": "از دوربین استفاده کنید",
+  "chooseFromLibrary": "انتخاب از گالری",
+  "pickExistingPhoto": "یک عکس موجود انتخاب کنید",
+  "removePhoto": "حذف عکس",
+  "resetToDefault": "بازگشت به حالت پیش‌فرض",
+
+  "charCounter": "{current} / {max}",
+  "@charCounter": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "max": { "type": "int" }
+    }
+  },
+
+  "validationRequired": "این فیلد الزامی است",
+  "validationMinLength": "باید حداقل {min} کاراکتر باشد",
+  "@validationMinLength": {
+    "placeholders": {
+      "min": { "type": "int" }
+    }
+  },
+  "validationMaxLength": "باید حداکثر {max} کاراکتر باشد",
+  "@validationMaxLength": {
+    "placeholders": {
+      "max": { "type": "int" }
+    }
+  },
+  "validationStartsWithLetter": "باید با یک حرف شروع شود",
+  "validationEndsWithLetterOrNumber": "باید با یک حرف یا عدد تمام شود",
+  "validationUsernameChars": "فقط حروف، اعداد، نقطه، خط تیره و خط زیرین"
+}

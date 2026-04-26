@@ -1,0 +1,74 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "App Template",
+
+  "tabHome": "Home",
+  "tabProfile": "Profile",
+
+  "homeIntro": "A starting point with batteries included — Riverpod, GoRouter, Dio, Freezed, secure auth, L10n (en + fa), Sentry, PostHog. Pull to refresh.",
+
+  "login": "Log In",
+  "signup": "Sign Up",
+  "logout": "Log Out",
+  "loginSuccess": "Welcome back!",
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "forgotPassword": "Forgot password?",
+  "name": "Name",
+
+  "profile": "Profile",
+  "editProfile": "Edit Profile",
+  "settings": "Settings",
+
+  "chooseLanguage": "Choose your language",
+  "chooseLanguageSubtitle": "Select your preferred language",
+
+  "chooseTheme": "Choose your theme",
+  "chooseThemeSubtitle": "Pick a default appearance — you can change this any time in settings",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "themeSystem": "System",
+
+  "cancel": "Cancel",
+
+  "discardChanges": "Discard Changes?",
+  "discardChangesBody": "You have unsaved changes. Are you sure you want to go back?",
+  "keepEditing": "Keep Editing",
+  "discard": "Discard",
+
+  "copiedToClipboard": "Copied to clipboard",
+
+  "takePhoto": "Take Photo",
+  "useYourCamera": "Use your camera",
+  "chooseFromLibrary": "Choose from Library",
+  "pickExistingPhoto": "Pick an existing photo",
+  "removePhoto": "Remove Photo",
+  "resetToDefault": "Reset to default",
+
+  "charCounter": "{current} / {max}",
+  "@charCounter": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "max": { "type": "int" }
+    }
+  },
+
+  "validationRequired": "Required",
+  "validationMinLength": "Must be at least {min} characters",
+  "@validationMinLength": {
+    "placeholders": {
+      "min": { "type": "int" }
+    }
+  },
+  "validationMaxLength": "Must be at most {max} characters",
+  "@validationMaxLength": {
+    "placeholders": {
+      "max": { "type": "int" }
+    }
+  },
+  "validationStartsWithLetter": "Must start with a letter",
+  "validationEndsWithLetterOrNumber": "Must end with a letter or number",
+  "validationUsernameChars": "Only letters, numbers, dots, dashes and underscores"
+}
