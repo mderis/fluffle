@@ -11,13 +11,71 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  format-fix:
+    name: Auto-format
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Run formatter
+        id: format
+        run: |
+          dart format $(find lib test \
+            -name '*.dart' \
+            -not -name '*.g.dart' \
+            -not -name '*.freezed.dart' \
+            -not -name '*.gen.dart' \
+            -not -path 'lib/l10n/app_localizations*')
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "drift=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "drift=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit formatting (same-repo PR)
+        if: |
+          steps.format.outputs.drift == 'true' &&
+          github.event.pull_request.head.repo.fork == false
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "ci: dart format"
+          git push
+
+      - name: Fail on fork drift
+        if: |
+          steps.format.outputs.drift == 'true' &&
+          github.event.pull_request.head.repo.fork == true
+        run: |
+          echo "::error::Code is not dart-formatted. Run 'dart format lib test' locally and re-push."
+          exit 1
+
   analyze-and-test:
     name: Analyze & Test
+    needs: [format-fix]
+    if: ${{ !cancelled() && (needs.format-fix.result == 'success' || needs.format-fix.result == 'skipped') }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref }}
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -44,15 +102,6 @@ jobs:
 
       - name: Generate localizations
         run: flutter gen-l10n
-
-      - name: Verify formatting
-        run: |
-          dart format --output=none --set-exit-if-changed $(find lib test \
-            -name '*.dart' \
-            -not -name '*.g.dart' \
-            -not -name '*.freezed.dart' \
-            -not -name '*.gen.dart' \
-            -not -path 'lib/l10n/app_localizations*')
 
       - name: Analyze
         run: flutter analyze
