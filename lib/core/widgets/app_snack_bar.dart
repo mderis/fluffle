@@ -12,10 +12,7 @@ class AppSnackBarAction {
   final String label;
   final VoidCallback onPressed;
 
-  const AppSnackBarAction({
-    required this.label,
-    required this.onPressed,
-  });
+  const AppSnackBarAction({required this.label, required this.onPressed});
 }
 
 /// Centralized snackbar system.

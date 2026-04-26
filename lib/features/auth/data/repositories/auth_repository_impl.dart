@@ -23,9 +23,9 @@ class AuthRepositoryImpl implements AuthRepository {
     required AuthApi api,
     required FlutterSecureStorage storage,
     required AppConfig config,
-  })  : _api = api,
-        _storage = storage,
-        _config = config;
+  }) : _api = api,
+       _storage = storage,
+       _config = config;
 
   @override
   Future<Either<Failure, AuthTokens>> login({

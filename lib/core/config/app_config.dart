@@ -25,22 +25,22 @@ class AppConfig {
   bool get isProd => flavor == Flavor.prod;
 
   factory AppConfig.dev() => AppConfig(
-        flavor: Flavor.dev,
-        apiBaseUrl: EnvDev.apiBaseUrl,
-        authClientId: EnvDev.authClientId,
-        authClientSecret: EnvDev.authClientSecret,
-        posthogApiKey: EnvDev.posthogApiKey,
-        posthogHost: EnvDev.posthogHost,
-        sentryDsn: EnvDev.sentryDsn,
-      );
+    flavor: Flavor.dev,
+    apiBaseUrl: EnvDev.apiBaseUrl,
+    authClientId: EnvDev.authClientId,
+    authClientSecret: EnvDev.authClientSecret,
+    posthogApiKey: EnvDev.posthogApiKey,
+    posthogHost: EnvDev.posthogHost,
+    sentryDsn: EnvDev.sentryDsn,
+  );
 
   factory AppConfig.prod() => AppConfig(
-        flavor: Flavor.prod,
-        apiBaseUrl: EnvProd.apiBaseUrl,
-        authClientId: EnvProd.authClientId,
-        authClientSecret: EnvProd.authClientSecret,
-        posthogApiKey: EnvProd.posthogApiKey,
-        posthogHost: EnvProd.posthogHost,
-        sentryDsn: EnvProd.sentryDsn,
-      );
+    flavor: Flavor.prod,
+    apiBaseUrl: EnvProd.apiBaseUrl,
+    authClientId: EnvProd.authClientId,
+    authClientSecret: EnvProd.authClientSecret,
+    posthogApiKey: EnvProd.posthogApiKey,
+    posthogHost: EnvProd.posthogHost,
+    sentryDsn: EnvProd.sentryDsn,
+  );
 }

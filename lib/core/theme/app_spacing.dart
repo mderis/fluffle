@@ -65,12 +65,15 @@ abstract class AppRadius {
   static BorderRadius get xxlBorder => BorderRadius.circular(xxl);
   static BorderRadius get fullBorder => BorderRadius.circular(full);
 
-  static BorderRadius topMd =
-      const BorderRadius.vertical(top: Radius.circular(md));
-  static BorderRadius topLg =
-      const BorderRadius.vertical(top: Radius.circular(lg));
-  static BorderRadius bottomLg =
-      const BorderRadius.vertical(bottom: Radius.circular(lg));
+  static BorderRadius topMd = const BorderRadius.vertical(
+    top: Radius.circular(md),
+  );
+  static BorderRadius topLg = const BorderRadius.vertical(
+    top: Radius.circular(lg),
+  );
+  static BorderRadius bottomLg = const BorderRadius.vertical(
+    bottom: Radius.circular(lg),
+  );
 }
 
 // ──────────────────────────────────────────────

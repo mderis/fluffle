@@ -6,8 +6,9 @@ import 'package:app_template/core/storage/shared_preferences_provider.dart';
 
 const _themeModeKey = 'theme_mode';
 
-final themeModeProvider =
-    AsyncNotifierProvider<ThemeModeNotifier, ThemeMode?>(ThemeModeNotifier.new);
+final themeModeProvider = AsyncNotifierProvider<ThemeModeNotifier, ThemeMode?>(
+  ThemeModeNotifier.new,
+);
 
 class ThemeModeNotifier extends AsyncNotifier<ThemeMode?> {
   @override
@@ -28,9 +29,9 @@ class ThemeModeNotifier extends AsyncNotifier<ThemeMode?> {
   }
 
   ThemeMode? _fromString(String? value) => switch (value) {
-        'light' => ThemeMode.light,
-        'dark' => ThemeMode.dark,
-        'system' => ThemeMode.system,
-        _ => null,
-      };
+    'light' => ThemeMode.light,
+    'dark' => ThemeMode.dark,
+    'system' => ThemeMode.system,
+    _ => null,
+  };
 }

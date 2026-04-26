@@ -72,10 +72,7 @@ class _PullToRefreshHapticState extends State<PullToRefreshHaptic> {
   Widget build(BuildContext context) {
     return NotificationListener<ScrollNotification>(
       onNotification: _handleNotification,
-      child: RefreshIndicator(
-        onRefresh: widget.onRefresh,
-        child: widget.child,
-      ),
+      child: RefreshIndicator(onRefresh: widget.onRefresh, child: widget.child),
     );
   }
 }

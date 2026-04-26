@@ -93,7 +93,9 @@ class AppTheme {
           borderSide: BorderSide(color: c.primary, width: AppStroke.medium),
         ),
         contentPadding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+          horizontal: AppSpacing.md,
+          vertical: AppSpacing.sm,
+        ),
         hintStyle: TextStyle(color: c.textHint),
         helperStyle: TextStyle(color: c.textHint),
       ),
@@ -103,19 +105,15 @@ class AppTheme {
           foregroundColor: c.textOnPrimary,
           elevation: 0,
           minimumSize: const Size(double.infinity, AppSizes.buttonHeightMd),
-          shape: RoundedRectangleBorder(
-            borderRadius: AppRadius.mdBorder,
-          ),
-          textStyle: TextStyle(
+          shape: RoundedRectangleBorder(borderRadius: AppRadius.mdBorder),
+          textStyle: const TextStyle(
             fontSize: AppFontSize.headline,
             fontWeight: AppFontWeight.semiBold,
           ),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          foregroundColor: c.primary,
-        ),
+        style: TextButton.styleFrom(foregroundColor: c.primary),
       ),
       dividerTheme: DividerThemeData(
         color: c.divider,
@@ -151,10 +149,7 @@ class AppTheme {
           color: c.textPrimary,
           fontSize: AppFontSize.headline,
         ),
-        bodyMedium: TextStyle(
-          color: c.textPrimary,
-          fontSize: AppFontSize.body,
-        ),
+        bodyMedium: TextStyle(color: c.textPrimary, fontSize: AppFontSize.body),
         bodySmall: TextStyle(
           color: c.textSecondary,
           fontSize: AppFontSize.footnote,
@@ -175,9 +170,7 @@ class AppTheme {
           letterSpacing: AppLetterSpacing.wide,
         ),
       ),
-      extensions: [
-        AppColorsExtension(c),
-      ],
+      extensions: [AppColorsExtension(c)],
     );
   }
 }
@@ -193,8 +186,10 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       AppColorsExtension(colors ?? this.colors);
 
   @override
-  AppColorsExtension lerp(covariant ThemeExtension<AppColorsExtension>? other,
-      double t) {
+  AppColorsExtension lerp(
+    covariant ThemeExtension<AppColorsExtension>? other,
+    double t,
+  ) {
     return this;
   }
 }

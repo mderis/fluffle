@@ -22,9 +22,9 @@ class Paginated<T> {
 
 extension ApiPaginationMapper on ApiPagination {
   Paginated<T> toPaginated<T>(List<T> items) => Paginated(
-        items: items,
-        total: total,
-        currentPage: currentPage,
-        totalPages: totalPages,
-      );
+    items: items,
+    total: total,
+    currentPage: currentPage,
+    totalPages: totalPages,
+  );
 }

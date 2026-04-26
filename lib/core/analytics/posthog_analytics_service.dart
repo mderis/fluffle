@@ -12,10 +12,7 @@ class PostHogAnalyticsService implements AnalyticsService {
     required String userId,
     Map<String, Object>? properties,
   }) async {
-    await _posthog.identify(
-      userId: userId,
-      userProperties: properties,
-    );
+    await _posthog.identify(userId: userId, userProperties: properties);
   }
 
   @override
@@ -23,10 +20,7 @@ class PostHogAnalyticsService implements AnalyticsService {
     required String event,
     Map<String, Object>? properties,
   }) async {
-    await _posthog.capture(
-      eventName: event,
-      properties: properties,
-    );
+    await _posthog.capture(eventName: event, properties: properties);
   }
 
   @override
@@ -34,17 +28,12 @@ class PostHogAnalyticsService implements AnalyticsService {
     required String name,
     Map<String, Object>? properties,
   }) async {
-    await _posthog.screen(
-      screenName: name,
-      properties: properties,
-    );
+    await _posthog.screen(screenName: name, properties: properties);
   }
 
   @override
   Future<void> setUserProperties(Map<String, Object> properties) async {
-    await _posthog.setPersonProperties(
-      userPropertiesToSet: properties,
-    );
+    await _posthog.setPersonProperties(userPropertiesToSet: properties);
   }
 
   @override

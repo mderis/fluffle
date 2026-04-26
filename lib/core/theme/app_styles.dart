@@ -85,13 +85,13 @@ abstract class AppButtonStyle {
 abstract class AppBoxStyle {
   /// Primary-tinted icon container (e.g. account info rows).
   static BoxDecoration iconPrimary(AppColors colors) => BoxDecoration(
-        color: colors.primary.withValues(alpha: AppOpacity.bgDecorLight),
-        borderRadius: AppRadius.smBorder,
-      );
+    color: colors.primary.withValues(alpha: AppOpacity.bgDecorLight),
+    borderRadius: AppRadius.smBorder,
+  );
 
   /// Neutral icon container (e.g. settings rows).
   static BoxDecoration iconNeutral(AppColors colors) => BoxDecoration(
-        color: colors.surfaceBorder,
-        borderRadius: AppRadius.smBorder,
-      );
+    color: colors.surfaceBorder,
+    borderRadius: AppRadius.smBorder,
+  );
 }

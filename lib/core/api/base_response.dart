@@ -7,16 +7,12 @@ class ApiListResponse<T> {
   final List<T> data;
   final ApiMeta meta;
 
-  const ApiListResponse({
-    required this.data,
-    required this.meta,
-  });
+  const ApiListResponse({required this.data, required this.meta});
 
   factory ApiListResponse.fromJson(
     Map<String, dynamic> json,
     T Function(Object? json) fromJsonT,
-  ) =>
-      _$ApiListResponseFromJson(json, fromJsonT);
+  ) => _$ApiListResponseFromJson(json, fromJsonT);
 
   Map<String, dynamic> toJson(Object? Function(T value) toJsonT) =>
       _$ApiListResponseToJson(this, toJsonT);
@@ -31,8 +27,7 @@ class ApiSingleResponse<T> {
   factory ApiSingleResponse.fromJson(
     Map<String, dynamic> json,
     T Function(Object? json) fromJsonT,
-  ) =>
-      _$ApiSingleResponseFromJson(json, fromJsonT);
+  ) => _$ApiSingleResponseFromJson(json, fromJsonT);
 
   Map<String, dynamic> toJson(Object? Function(T value) toJsonT) =>
       _$ApiSingleResponseToJson(this, toJsonT);

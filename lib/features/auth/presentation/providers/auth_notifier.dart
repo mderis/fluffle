@@ -9,20 +9,18 @@ import 'package:app_template/features/auth/domain/usecases/login.dart';
 import 'package:app_template/features/auth/domain/usecases/register.dart';
 import 'package:app_template/features/auth/domain/usecases/update_user.dart';
 
-final authNotifierProvider =
-    AsyncNotifierProvider<AuthNotifier, User?>(AuthNotifier.new);
+final authNotifierProvider = AsyncNotifierProvider<AuthNotifier, User?>(
+  AuthNotifier.new,
+);
 
 class AuthNotifier extends AsyncNotifier<User?> {
   @override
   Future<User?> build() async {
     final result = await ref.read(getCurrentUserUseCaseProvider).call();
-    return result.fold(
-      (failure) => null,
-      (user) {
-        _identifyUser(user);
-        return user;
-      },
-    );
+    return result.fold((failure) => null, (user) {
+      _identifyUser(user);
+      return user;
+    });
   }
 
   Future<Failure?> login({
@@ -31,9 +29,9 @@ class AuthNotifier extends AsyncNotifier<User?> {
   }) async {
     state = const AsyncLoading();
 
-    final result = await ref.read(loginUseCaseProvider).call(
-          LoginParams(email: email, password: password),
-        );
+    final result = await ref
+        .read(loginUseCaseProvider)
+        .call(LoginParams(email: email, password: password));
 
     return result.fold(
       (failure) {
@@ -65,7 +63,9 @@ class AuthNotifier extends AsyncNotifier<User?> {
   }) async {
     state = const AsyncLoading();
 
-    final result = await ref.read(registerUseCaseProvider).call(
+    final result = await ref
+        .read(registerUseCaseProvider)
+        .call(
           RegisterParams(
             name: name,
             email: email,
@@ -101,17 +101,14 @@ class AuthNotifier extends AsyncNotifier<User?> {
     String? name,
     String? username,
   }) async {
-    final result = await ref.read(updateUserUseCaseProvider).call(
-          UpdateUserParams(id: id, name: name, username: username),
-        );
+    final result = await ref
+        .read(updateUserUseCaseProvider)
+        .call(UpdateUserParams(id: id, name: name, username: username));
 
-    return result.fold(
-      (failure) => failure,
-      (user) {
-        state = AsyncData(user);
-        return null;
-      },
-    );
+    return result.fold((failure) => failure, (user) {
+      state = AsyncData(user);
+      return null;
+    });
   }
 
   Future<void> logout() async {
@@ -123,17 +120,17 @@ class AuthNotifier extends AsyncNotifier<User?> {
   }
 
   void _identifyUser(User user) {
-    ref.read(analyticsProvider).identify(
-      userId: user.id,
-      properties: {
-        'email': user.email,
-        if (user.displayName != user.email) 'name': user.displayName,
-      },
-    );
-    ref.read(errorReporterProvider).setUser(
-          id: user.id,
-          email: user.email,
-          name: user.displayName,
+    ref
+        .read(analyticsProvider)
+        .identify(
+          userId: user.id,
+          properties: {
+            'email': user.email,
+            if (user.displayName != user.email) 'name': user.displayName,
+          },
         );
+    ref
+        .read(errorReporterProvider)
+        .setUser(id: user.id, email: user.email, name: user.displayName);
   }
 }

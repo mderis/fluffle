@@ -85,10 +85,7 @@ abstract class PaginatedAsyncNotifier<T>
     state = AsyncData(newState);
   }
 
-  Future<PaginatedState<T>> _fetchAndProcess(
-    int page, {
-    String? search,
-  }) async {
+  Future<PaginatedState<T>> _fetchAndProcess(int page, {String? search}) async {
     final result = await fetchPage(page, search);
 
     return result.fold(
@@ -97,10 +94,7 @@ abstract class PaginatedAsyncNotifier<T>
         if (page == 1) {
           return PaginatedState<T>(failure: failure);
         }
-        return current.copyWith(
-          isLoadingMore: false,
-          failure: () => failure,
-        );
+        return current.copyWith(isLoadingMore: false, failure: () => failure);
       },
       (paginated) {
         final current = state.value ?? const PaginatedState();

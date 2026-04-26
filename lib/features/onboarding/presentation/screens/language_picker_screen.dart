@@ -26,7 +26,8 @@ class LanguagePickerScreen extends ConsumerWidget {
         child: Center(
           child: Padding(
             padding: const EdgeInsetsDirectional.symmetric(
-                horizontal: AppSpacing.xl),
+              horizontal: AppSpacing.xl,
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -53,7 +54,8 @@ class LanguagePickerScreen extends ConsumerWidget {
                 ..._languages.map(
                   (lang) => Padding(
                     padding: const EdgeInsetsDirectional.only(
-                        bottom: AppSpacing.sm),
+                      bottom: AppSpacing.sm,
+                    ),
                     child: _LanguageTile(
                       option: lang,
                       onTap: () {
@@ -101,15 +103,16 @@ class _LanguageTile extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Text(option.flag,
-                  style: const TextStyle(fontSize: AppFontSize.largeTitle)),
+              Text(
+                option.flag,
+                style: const TextStyle(fontSize: AppFontSize.largeTitle),
+              ),
               const SizedBox(width: AppSpacing.md),
               Expanded(
                 child: Text(
                   option.name,
                   style: theme.textTheme.titleMedium,
-                  textDirection:
-                      isRtl ? TextDirection.rtl : TextDirection.ltr,
+                  textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
                 ),
               ),
               Icon(

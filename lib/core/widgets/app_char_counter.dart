@@ -36,10 +36,7 @@ class AppCharCounter extends StatelessWidget {
 
     return Text(
       L10n.of(context).charCounter(current, max),
-      style: TextStyle(
-        fontSize: AppFontSize.caption,
-        color: color,
-      ),
+      style: TextStyle(fontSize: AppFontSize.caption, color: color),
     );
   }
 }

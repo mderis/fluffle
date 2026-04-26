@@ -20,14 +20,46 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   final _scrollController = ScrollController();
 
   static const _items = <_DemoItem>[
-    _DemoItem(icon: Icons.bolt, title: 'Riverpod', subtitle: 'State management'),
-    _DemoItem(icon: Icons.alt_route, title: 'GoRouter', subtitle: 'Declarative routing'),
-    _DemoItem(icon: Icons.cloud, title: 'Dio + Retrofit', subtitle: 'Typed HTTP client'),
-    _DemoItem(icon: Icons.lock_outline, title: 'Secure storage', subtitle: 'Token persistence'),
-    _DemoItem(icon: Icons.translate, title: 'L10n', subtitle: 'Multi-language ready'),
-    _DemoItem(icon: Icons.palette_outlined, title: 'Theme tokens', subtitle: 'Light + dark'),
-    _DemoItem(icon: Icons.bug_report_outlined, title: 'Sentry', subtitle: 'Error reporting'),
-    _DemoItem(icon: Icons.analytics_outlined, title: 'PostHog', subtitle: 'Analytics'),
+    _DemoItem(
+      icon: Icons.bolt,
+      title: 'Riverpod',
+      subtitle: 'State management',
+    ),
+    _DemoItem(
+      icon: Icons.alt_route,
+      title: 'GoRouter',
+      subtitle: 'Declarative routing',
+    ),
+    _DemoItem(
+      icon: Icons.cloud,
+      title: 'Dio + Retrofit',
+      subtitle: 'Typed HTTP client',
+    ),
+    _DemoItem(
+      icon: Icons.lock_outline,
+      title: 'Secure storage',
+      subtitle: 'Token persistence',
+    ),
+    _DemoItem(
+      icon: Icons.translate,
+      title: 'L10n',
+      subtitle: 'Multi-language ready',
+    ),
+    _DemoItem(
+      icon: Icons.palette_outlined,
+      title: 'Theme tokens',
+      subtitle: 'Light + dark',
+    ),
+    _DemoItem(
+      icon: Icons.bug_report_outlined,
+      title: 'Sentry',
+      subtitle: 'Error reporting',
+    ),
+    _DemoItem(
+      icon: Icons.analytics_outlined,
+      title: 'PostHog',
+      subtitle: 'Analytics',
+    ),
   ];
 
   @override
@@ -61,9 +93,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final l10n = L10n.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.tabHome),
-      ),
+      appBar: AppBar(title: Text(l10n.tabHome)),
       body: PullToRefreshHaptic(
         onRefresh: _onRefresh,
         child: ListView.separated(

@@ -63,10 +63,7 @@ class AppImagePickerSheet extends StatelessWidget {
         top: Radius.circular(AppRadius.xl),
       ),
       child: BackdropFilter(
-        filter: ImageFilter.blur(
-          sigmaX: AppBlur.lg,
-          sigmaY: AppBlur.lg,
-        ),
+        filter: ImageFilter.blur(sigmaX: AppBlur.lg, sigmaY: AppBlur.lg),
         child: Container(
           color: colors.sheetBg,
           child: SafeArea(
@@ -127,10 +124,8 @@ class AppImagePickerSheet extends StatelessWidget {
                         iconBgColor: colors.successBg,
                         iconColor: colors.primary,
                         labelColor: colors.textPrimary,
-                        onTap: () => Navigator.pop(
-                          context,
-                          ImagePickerResult.camera,
-                        ),
+                        onTap: () =>
+                            Navigator.pop(context, ImagePickerResult.camera),
                       ),
                       _SheetOption(
                         icon: Icons.photo_library_outlined,
@@ -139,10 +134,8 @@ class AppImagePickerSheet extends StatelessWidget {
                         iconBgColor: colors.successBg,
                         iconColor: colors.primary,
                         labelColor: colors.textPrimary,
-                        onTap: () => Navigator.pop(
-                          context,
-                          ImagePickerResult.gallery,
-                        ),
+                        onTap: () =>
+                            Navigator.pop(context, ImagePickerResult.gallery),
                       ),
                       if (hasExistingImage)
                         _SheetOption(
@@ -152,10 +145,8 @@ class AppImagePickerSheet extends StatelessWidget {
                           iconBgColor: colors.errorBg,
                           iconColor: colors.error,
                           labelColor: colors.error,
-                          onTap: () => Navigator.pop(
-                            context,
-                            ImagePickerResult.remove,
-                          ),
+                          onTap: () =>
+                              Navigator.pop(context, ImagePickerResult.remove),
                         ),
                     ],
                   ),
@@ -240,11 +231,7 @@ class _SheetOption extends StatelessWidget {
                 color: iconBgColor,
                 shape: BoxShape.circle,
               ),
-              child: Icon(
-                icon,
-                size: AppSizes.iconLg,
-                color: iconColor,
-              ),
+              child: Icon(icon, size: AppSizes.iconLg, color: iconColor),
             ),
             const SizedBox(width: AppSpacing.md),
             Expanded(

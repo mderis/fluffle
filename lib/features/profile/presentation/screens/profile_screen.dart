@@ -49,10 +49,7 @@ class ProfileScreen extends ConsumerWidget {
                 ),
                 if (user?.email != null) ...[
                   const SizedBox(height: AppSpacing.xxs),
-                  Text(
-                    user!.email,
-                    style: theme.textTheme.bodyMedium,
-                  ),
+                  Text(user!.email, style: theme.textTheme.bodyMedium),
                 ],
               ],
             ),
@@ -74,8 +71,7 @@ class ProfileScreen extends ConsumerWidget {
                     l10n.logout,
                     style: const TextStyle(color: Colors.redAccent),
                   ),
-                  onTap: () =>
-                      ref.read(authNotifierProvider.notifier).logout(),
+                  onTap: () => ref.read(authNotifierProvider.notifier).logout(),
                 ),
               ],
             ),

@@ -58,17 +58,17 @@ class ErrorInterceptor extends Interceptor {
       401 => AuthFailure(message: message ?? 'Unauthorized'),
       403 => AuthFailure(message: message ?? 'Forbidden'),
       422 => ValidationFailure(
-          message: message ?? 'Validation failed',
-          fieldErrors: _extractFieldErrors(data),
-        ),
+        message: message ?? 'Validation failed',
+        fieldErrors: _extractFieldErrors(data),
+      ),
       final code? when code >= 400 && code < 500 => ServerFailure(
-          message: message ?? 'Client error',
-          statusCode: code,
-        ),
+        message: message ?? 'Client error',
+        statusCode: code,
+      ),
       _ => ServerFailure(
-          message: message ?? 'Server error',
-          statusCode: statusCode,
-        ),
+        message: message ?? 'Server error',
+        statusCode: statusCode,
+      ),
     };
   }
 
