@@ -22,9 +22,7 @@ abstract class UserDto with _$UserDto {
 
 @freezed
 abstract class UserResponseDto with _$UserResponseDto {
-  const factory UserResponseDto({
-    required UserDto data,
-  }) = _UserResponseDto;
+  const factory UserResponseDto({required UserDto data}) = _UserResponseDto;
 
   factory UserResponseDto.fromJson(Map<String, dynamic> json) =>
       _$UserResponseDtoFromJson(json);
@@ -32,13 +30,13 @@ abstract class UserResponseDto with _$UserResponseDto {
 
 extension UserDtoMapper on UserDto {
   User toEntity() => User(
-        id: id,
-        email: email,
-        name: name,
-        username: username,
-        avatarUrl: avatar,
-        emailVerifiedAt: emailVerifiedAt != null
-            ? DateTime.tryParse(emailVerifiedAt!)
-            : null,
-      );
+    id: id,
+    email: email,
+    name: name,
+    username: username,
+    avatarUrl: avatar,
+    emailVerifiedAt: emailVerifiedAt != null
+        ? DateTime.tryParse(emailVerifiedAt!)
+        : null,
+  );
 }

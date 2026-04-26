@@ -37,7 +37,8 @@ class ThemePickerScreen extends ConsumerWidget {
         child: Center(
           child: Padding(
             padding: const EdgeInsetsDirectional.symmetric(
-                horizontal: AppSpacing.xl),
+              horizontal: AppSpacing.xl,
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -64,7 +65,8 @@ class ThemePickerScreen extends ConsumerWidget {
                 ...options.map(
                   (opt) => Padding(
                     padding: const EdgeInsetsDirectional.only(
-                        bottom: AppSpacing.sm),
+                      bottom: AppSpacing.sm,
+                    ),
                     child: _ThemeTile(
                       option: opt,
                       onTap: () {

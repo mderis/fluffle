@@ -29,11 +29,7 @@ class SentryErrorReporter implements ErrorReporter {
     String? name,
   }) async {
     Sentry.configureScope(
-      (scope) => scope.setUser(SentryUser(
-        id: id,
-        email: email,
-        name: name,
-      )),
+      (scope) => scope.setUser(SentryUser(id: id, email: email, name: name)),
     );
   }
 

@@ -27,10 +27,7 @@ class AppValidators {
     };
   }
 
-  static FormFieldValidator<String> minLength(
-    BuildContext context,
-    int min,
-  ) {
+  static FormFieldValidator<String> minLength(BuildContext context, int min) {
     final l10n = L10n.of(context);
     return (value) {
       if (value != null && value.trim().length < min) {
@@ -40,10 +37,7 @@ class AppValidators {
     };
   }
 
-  static FormFieldValidator<String> maxLength(
-    BuildContext context,
-    int max,
-  ) {
+  static FormFieldValidator<String> maxLength(BuildContext context, int max) {
     final l10n = L10n.of(context);
     return (value) {
       if (value != null && value.trim().length > max) {

@@ -20,8 +20,8 @@ abstract class AuthResponseDto with _$AuthResponseDto {
 
 extension AuthResponseDtoMapper on AuthResponseDto {
   AuthTokens toEntity() => AuthTokens(
-        accessToken: accessToken,
-        refreshToken: refreshToken,
-        expiresIn: expiresIn,
-      );
+    accessToken: accessToken,
+    refreshToken: refreshToken,
+    expiresIn: expiresIn,
+  );
 }

@@ -20,8 +20,7 @@ class MainShellScreen extends ConsumerWidget {
       body: navigationShell,
       bottomNavigationBar: MainBottomNavBar(
         currentIndex: navigationShell.currentIndex,
-        onDestinationSelected: (index) =>
-            _onTabSelected(context, ref, index),
+        onDestinationSelected: (index) => _onTabSelected(context, ref, index),
       ),
     );
   }

@@ -15,12 +15,12 @@ class ScrollToTopEvent {
 
 final scrollToTopSignalProvider =
     NotifierProvider<ScrollToTopSignal, ScrollToTopEvent>(
-        ScrollToTopSignal.new);
+      ScrollToTopSignal.new,
+    );
 
 class ScrollToTopSignal extends Notifier<ScrollToTopEvent> {
   @override
   ScrollToTopEvent build() => ScrollToTopEvent.none;
 
-  void bump(int branch) =>
-      state = ScrollToTopEvent(branch, state.counter + 1);
+  void bump(int branch) => state = ScrollToTopEvent(branch, state.counter + 1);
 }

@@ -10,11 +10,7 @@ class UpdateUserParams {
   final String? name;
   final String? username;
 
-  const UpdateUserParams({
-    required this.id,
-    this.name,
-    this.username,
-  });
+  const UpdateUserParams({required this.id, this.name, this.username});
 }
 
 class UpdateUser extends UseCase<User, UpdateUserParams> {

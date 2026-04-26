@@ -88,10 +88,7 @@ class AppConfirmDialog extends StatelessWidget {
           child: ClipRRect(
             borderRadius: AppRadius.xlBorder,
             child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: AppBlur.lg,
-                sigmaY: AppBlur.lg,
-              ),
+              filter: ImageFilter.blur(sigmaX: AppBlur.lg, sigmaY: AppBlur.lg),
               child: Material(
                 color: colors.surface,
                 shape: RoundedRectangleBorder(

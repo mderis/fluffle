@@ -9,8 +9,9 @@ import 'package:app_template/core/storage/shared_preferences_provider.dart';
 
 const _localeKey = 'locale';
 
-final localeProvider =
-    AsyncNotifierProvider<LocaleNotifier, Locale?>(LocaleNotifier.new);
+final localeProvider = AsyncNotifierProvider<LocaleNotifier, Locale?>(
+  LocaleNotifier.new,
+);
 
 class LocaleNotifier extends AsyncNotifier<Locale?> {
   @override
@@ -35,9 +36,7 @@ class LocaleNotifier extends AsyncNotifier<Locale?> {
   }
 
   Locale? _fromLanguageCode(String code) {
-    final match = SupportedLocales.all.where(
-      (l) => l.languageCode == code,
-    );
+    final match = SupportedLocales.all.where((l) => l.languageCode == code);
     return match.isEmpty ? null : match.first;
   }
 }

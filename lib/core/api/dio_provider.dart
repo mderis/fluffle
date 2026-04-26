@@ -15,9 +15,7 @@ final secureStorageProvider = Provider<FlutterSecureStorage>(
 );
 
 final loggerProvider = Provider<Logger>(
-  (ref) => Logger(
-    printer: PrettyPrinter(methodCount: 0),
-  ),
+  (ref) => Logger(printer: PrettyPrinter(methodCount: 0)),
 );
 
 final dioProvider = Provider<Dio>((ref) {

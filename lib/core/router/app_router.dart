@@ -29,8 +29,9 @@ final _profileNavKey = GlobalKey<NavigatorState>(debugLabel: 'profile');
 /// - App initialization (splash → app)
 /// - Locale chosen (onboarding → app)
 /// - Theme chosen (onboarding → app)
-final _routerNotifierProvider =
-    Provider<RouterNotifier>((ref) => RouterNotifier(ref));
+final _routerNotifierProvider = Provider<RouterNotifier>(
+  (ref) => RouterNotifier(ref),
+);
 
 class RouterNotifier extends ChangeNotifier {
   final Ref _ref;
@@ -140,9 +141,8 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: AppRoutes.home,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                  child: HomeScreen(),
-                ),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: HomeScreen()),
               ),
             ],
           ),

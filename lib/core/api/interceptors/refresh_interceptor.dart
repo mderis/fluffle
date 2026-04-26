@@ -8,11 +8,9 @@ class RefreshInterceptor extends QueuedInterceptor {
   static const _accessTokenKey = 'access_token';
   static const _refreshTokenKey = 'refresh_token';
 
-  RefreshInterceptor({
-    required Dio dio,
-    required FlutterSecureStorage storage,
-  })  : _dio = dio,
-        _storage = storage;
+  RefreshInterceptor({required Dio dio, required FlutterSecureStorage storage})
+    : _dio = dio,
+      _storage = storage;
 
   @override
   Future<void> onError(
@@ -30,9 +28,7 @@ class RefreshInterceptor extends QueuedInterceptor {
 
     try {
       // Use a fresh Dio instance to avoid interceptor loops
-      final refreshDio = Dio(BaseOptions(
-        baseUrl: _dio.options.baseUrl,
-      ));
+      final refreshDio = Dio(BaseOptions(baseUrl: _dio.options.baseUrl));
 
       final response = await refreshDio.post(
         '/auth/refresh',

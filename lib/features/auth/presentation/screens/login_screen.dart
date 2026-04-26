@@ -40,7 +40,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         child: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsetsDirectional.symmetric(
-                horizontal: AppSpacing.xl),
+              horizontal: AppSpacing.xl,
+            ),
             child: ReactiveForm(
               formGroup: _form,
               child: Column(
@@ -124,7 +125,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       _errorMessage = null;
     });
 
-    final failure = await ref.read(authNotifierProvider.notifier).login(
+    final failure = await ref
+        .read(authNotifierProvider.notifier)
+        .login(
           email: _form.control('email').value as String,
           password: _form.control('password').value as String,
         );

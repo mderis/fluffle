@@ -17,22 +17,21 @@ class SignupScreen extends ConsumerStatefulWidget {
 }
 
 class _SignupScreenState extends ConsumerState<SignupScreen> {
-  final _form = FormGroup({
-    'name': FormControl<String>(
-      validators: [Validators.required],
-    ),
-    'email': FormControl<String>(
-      validators: [Validators.required, Validators.email],
-    ),
-    'password': FormControl<String>(
-      validators: [Validators.required, Validators.minLength(8)],
-    ),
-    'password_confirmation': FormControl<String>(
-      validators: [Validators.required],
-    ),
-  }, validators: [
-    Validators.mustMatch('password', 'password_confirmation'),
-  ]);
+  final _form = FormGroup(
+    {
+      'name': FormControl<String>(validators: [Validators.required]),
+      'email': FormControl<String>(
+        validators: [Validators.required, Validators.email],
+      ),
+      'password': FormControl<String>(
+        validators: [Validators.required, Validators.minLength(8)],
+      ),
+      'password_confirmation': FormControl<String>(
+        validators: [Validators.required],
+      ),
+    },
+    validators: [Validators.mustMatch('password', 'password_confirmation')],
+  );
 
   String? _errorMessage;
   bool _isLoading = false;
@@ -47,7 +46,8 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
         child: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsetsDirectional.symmetric(
-                horizontal: AppSpacing.xl),
+              horizontal: AppSpacing.xl,
+            ),
             child: ReactiveForm(
               formGroup: _form,
               child: Column(
@@ -142,7 +142,9 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
       _errorMessage = null;
     });
 
-    final failure = await ref.read(authNotifierProvider.notifier).register(
+    final failure = await ref
+        .read(authNotifierProvider.notifier)
+        .register(
           name: _form.control('name').value as String,
           email: _form.control('email').value as String,
           password: _form.control('password').value as String,
