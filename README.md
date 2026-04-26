@@ -89,6 +89,42 @@ lib/
    make run-dev
    ```
 
+## GitHub repository setup
+
+CI assumes certain GitHub settings. Configure these once after your first push.
+
+### Branch protection rule (Settings → Branches → Add ruleset, target `main`)
+
+| Setting | Status | Why |
+|---|---|---|
+| Require a pull request before merging | **Required** | Ensures CI runs before merge. |
+| Require status checks: `Auto-format`, `Analyze & Test` | **Required** | Both must be green to merge. |
+| Require signed commits | **Must be OFF** | Auto-format bot's commits aren't signed. |
+| Require branches to be up to date | Recommended | Avoids merging stale PRs. |
+| Require linear history | Recommended | Cleaner main; pair with squash merge. |
+| Require conversation resolution | Recommended | Surfaces unaddressed review comments. |
+| Require approvals | Optional | Off for solo dev. Set to ≥1 for teams. |
+| Allow force pushes / deletions | OFF | Standard safety. |
+
+### Pull request merge options (Settings → General → Pull Requests)
+
+| Setting | Status |
+|---|---|
+| Allow merge commits | **Disable** (conflicts with linear history). |
+| Allow squash merging | Enable (matches Dependabot auto-merge). |
+| Allow rebase merging | Optional. |
+
+### Local git credentials
+
+Pushing changes to `.github/workflows/*` requires the `workflow` scope on your
+GitHub credential:
+
+```sh
+gh auth refresh -s workflow
+```
+
+Or regenerate your PAT with the `workflow` scope at github.com/settings/tokens.
+
 ## Onboarding flow
 
 First launch routes through:
