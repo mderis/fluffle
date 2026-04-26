@@ -106,7 +106,7 @@ class AppTheme {
           elevation: 0,
           minimumSize: const Size(double.infinity, AppSizes.buttonHeightMd),
           shape: RoundedRectangleBorder(borderRadius: AppRadius.mdBorder),
-          textStyle: TextStyle(
+          textStyle: const TextStyle(
             fontSize: AppFontSize.headline,
             fontWeight: AppFontWeight.semiBold,
           ),
