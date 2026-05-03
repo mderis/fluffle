@@ -19,15 +19,12 @@ build-ipa-prod:
 
 # Code Generation
 codegen:
-	dart run build_runner build --delete-conflicting-outputs
-
+	dart run build_runner build
 codegen-watch:
-	dart run build_runner watch --delete-conflicting-outputs
-
+	dart run build_runner watch
 regen-env:
 	dart run build_runner clean
-	dart run build_runner build --delete-conflicting-outputs
-
+	dart run build_runner build
 # Localization
 l10n:
 	flutter gen-l10n
