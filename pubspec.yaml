@@ -22,7 +22,7 @@ dependencies:
 
   # Models & Serialization
   freezed_annotation: ^3.1.0
-  json_annotation: ^4.10.0
+  json_annotation: ^4.11.0
 
   # Error Handling
   fpdart: ^1.2.0
