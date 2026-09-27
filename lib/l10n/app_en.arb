@@ -1,0 +1,34 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Fluffle",
+  "@appTitle": { "description": "App name shown in the task switcher and title bar." },
+
+  "foundationReady": "Foundation ready",
+  "@foundationReady": { "description": "Temporary placeholder shown until the router lands." },
+
+  "flavorLabel": "Flavor: {flavor}",
+  "@flavorLabel": {
+    "description": "Shows the active build flavor on the placeholder screen.",
+    "placeholders": { "flavor": { "type": "String", "example": "dev" } }
+  },
+
+  "errorOffline": "You're offline. Check your connection and try again.",
+  "@errorOffline": { "description": "NetworkFailure(offline)." },
+  "errorTimeout": "The server took too long to respond. Please try again.",
+  "@errorTimeout": { "description": "NetworkFailure(timeout)." },
+  "errorBadCertificate": "A secure connection couldn't be established.",
+  "@errorBadCertificate": { "description": "NetworkFailure(badCertificate)." },
+  "errorUnauthorized": "Your session has expired. Please sign in again.",
+  "@errorUnauthorized": { "description": "UnauthorizedFailure (HTTP 401)." },
+  "errorForbidden": "You don't have permission to do that.",
+  "@errorForbidden": { "description": "ForbiddenFailure (HTTP 403)." },
+  "errorNotFound": "We couldn't find what you were looking for.",
+  "@errorNotFound": { "description": "NotFoundFailure (HTTP 404)." },
+  "errorValidation": "Some fields need your attention.",
+  "@errorValidation": { "description": "ValidationFailure (HTTP 422) without a server message." },
+  "errorServer": "Something went wrong on our side. Please try again later.",
+  "@errorServer": { "description": "ServerFailure (other 4xx/5xx)." },
+  "errorUnexpected": "Something unexpected happened. Please try again.",
+  "@errorUnexpected": { "description": "UnexpectedFailure (bug in the app)." }
+}

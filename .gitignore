@@ -47,10 +47,12 @@ app.*.map.json
 # Widget Preview related
 .widget_preview/
 
-# Environment files (secrets). Only .env.example is committed.
+# Environment config. Only env/example.json is committed.
+/env/*.json
+!/env/example.json
+# Legacy envied files
 .env
 .env.*
-!.env.example
 
 # Local AI assistant settings
 .claude/settings.local.json
@@ -59,3 +61,6 @@ app.*.map.json
 *.g.dart
 *.freezed.dart
 *.gen.dart
+
+# gen-l10n output
+/lib/l10n/generated/

@@ -1,7 +1,44 @@
-include: package:flutter_lints/flutter.yaml
+# Strict baseline, Dart 3.13 aware.
+include: package:very_good_analysis/analysis_options.yaml
 
 analyzer:
   exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - lib/l10n/generated/**
     - build/**
     - android/**
     - ios/**
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+
+formatter:
+  # Keep Flutter widget trees split where a trailing comma is written.
+  trailing_commas: preserve
+
+linter:
+  rules:
+    # Dart 3.13: primary constructors and declaring parameters.
+    use_declaring_parameters: true
+    unnecessary_type_name_in_constructor: true
+    empty_container_bodies: true
+    initialize_in_field_declaration: true
+    unnecessary_primary_constructor_body: true
+    unnecessary_const_in_enum_constructor: true
+    # Dart 3.8+.
+    use_null_aware_elements: true
+    unnecessary_ignore: true
+    # Package imports everywhere (matches the architecture rules).
+    always_use_package_imports: true
+    prefer_relative_imports: false
+    # Disabled for now: the rule reports every primary constructor as
+    # undocumented even when the class is documented (Dart 3.13.4).
+    # Docs stay mandatory by convention (CLAUDE.md). Re-enable when fixed.
+    public_member_api_docs: false
+
+# Analyzer plugins (Dart 3.10+). Diagnostics only show in `dart analyze`,
+# not `flutter analyze` (flutter/flutter#193203), so CI uses `dart analyze`.
+plugins:
+  riverpod_lint: ^3.1.9
