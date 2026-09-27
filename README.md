@@ -23,7 +23,7 @@ envied configs, full L10n with RTL, Sentry monitoring, and PostHog analytics.
 | Analytics       | `AnalyticsService` interface → PostHog              |
 | Monitoring      | `ErrorReporter` interface → Sentry                  |
 | HTTP cache      | `dio_cache_interceptor` (wired in pubspec)          |
-| UI              | `cached_network_image`, `shimmer`, `flutter_svg`, `image_picker`, `image_cropper`, `flutter_markdown` |
+| UI              | `cached_network_image`, `shimmer`, `flutter_svg`, `image_picker`, `image_cropper` |
 
 ## Architecture
 
@@ -38,9 +38,10 @@ lib/
 │   ├── analytics/                  # AnalyticsService interface + PostHog impl
 │   ├── api/                        # Dio + interceptors + base response shapes
 │   ├── config/                     # AppConfig, Flavor enum, envied env files
-│   ├── domain/                     # Generic entities (User, Paginated), Failure, UseCase
+│   ├── domain/                     # Generic entities (User, Paginated), Failure
+│   ├── session/                    # currentUserNotifierProvider — app-wide signed-in user
 │   ├── init/                       # appInitProvider — orchestrates startup
-│   ├── l10n/                       # locale_provider, supported_locales
+│   ├── l10n/                       # locale_notifier, supported_locales
 │   ├── monitoring/                 # ErrorReporter interface + Sentry impl
 │   ├── presentation/               # PaginatedAsyncNotifier base
 │   ├── router/                     # GoRouter, AppRoutes, refresh listenable
@@ -50,12 +51,30 @@ lib/
 │   ├── validators/                 # AppValidators (l10n-aware)
 │   └── widgets/                    # AppSnackBar, AppConfirmDialog, AuthGate, …
 └── features/
-    ├── auth/                       # Full skeleton: data / domain / di / presentation
+    ├── auth/                       # Full skeleton — see "Feature layout" below
     ├── home/                       # Stub Home screen with dummy data
     ├── onboarding/                 # Splash → language → theme
     ├── profile/                    # Stub Profile + Edit Profile
     └── shell/                      # 2-tab bottom-nav shell
 ```
+
+### Feature layout
+
+Each feature is a self-contained module with a public API and private internals:
+
+```
+features/auth/
+├── auth.dart                       # Public barrel — the ONLY thing other features import
+└── src/                            # Private — never imported from outside this feature
+    ├── application/                # Controllers + provider wiring
+    ├── data/                       # API client, repository impl, DTOs
+    ├── domain/                     # Entities, repository interface
+    └── presentation/               # Grouped by screen (login/, signup/, …)
+```
+
+Cross-feature access goes through the barrel (e.g. `import 'package:app_template/features/auth/auth.dart'`). Reaching into another feature's `src/` is enforced against by `test/architecture/feature_boundary_test.dart` — it fails CI if anything imports `features/<x>/src/` from outside `features/<x>/`.
+
+Shared state that multiple features need (current user, theme, locale) lives in `core/`, not in a feature. The owning feature *writes* to it; other features *read*. See `core/session/current_user_notifier.dart` for the canonical example.
 
 ## Setup for a new project
 
@@ -81,7 +100,7 @@ lib/
    ```
    Or manually:
    ```sh
-   dart run build_runner build --delete-conflicting-outputs
+   dart run build_runner build
    flutter gen-l10n
    ```
 6. **Run dev:**
@@ -148,7 +167,7 @@ order. Once both choices are stored, subsequent launches go straight to Home.
   `flutter_secure_storage`. The `RefreshInterceptor` automatically refreshes
   on 401 and retries the original request.
 - **`AuthGate` widget** swaps between an authenticated child and a login
-  screen based on `authNotifierProvider`.
+  screen based on `currentUserNotifierProvider` (in `core/session/`).
 
 Adapt the endpoints in `auth_api.dart` to your backend. If you don't use
 OAuth2 password grant, simplify the request body in `auth_repository_impl.dart`.
@@ -162,12 +181,40 @@ OAuth2 password grant, simplify the request body in `auth_repository_impl.dart`.
 - **Use `EdgeInsetsDirectional`** + `PositionedDirectional` so RTL works
 - **Haptic feedback** on tap-driven UI (see `HapticFeedback.selectionClick`)
 
+### Provider naming
+
+Every Riverpod global ends in `xxxProvider` (the universal Riverpod suffix).
+The **middle word** names what's behind the provider, and that tells you both
+the backing class and how to use it at the call site:
+
+| Variable | Backing class | Call-site idiom |
+|---|---|---|
+| `xxxNotifierProvider` | `XxxNotifier extends Notifier<T>` | `ref.watch(...)` for state |
+| `xxxControllerProvider` | `XxxController extends AsyncNotifier<…>` | `ref.read(....notifier).method()` for ops |
+| `xxxSignalProvider` | `XxxSignal extends Notifier<Event>` | `ref.listen(...)` for one-shot events |
+| `xxxRepositoryProvider` / `xxxApiProvider` | service class | `ref.read(...).method()` |
+| `xxxProvider` (bare) | `Provider<T>` or `FutureProvider<T>` | `ref.watch(...)` returns `T` directly |
+
+Concretely: a `Notifier` *holds state* (you read its `state`), a `Controller`
+*orchestrates operations* (you call its methods via `.notifier`), a
+`Repository`/`Api` is a *service* (DI wiring, you call its methods directly).
+The naming makes the intent visible without opening the file.
+
+### Feature isolation
+
+- A feature exposes its public API through a single barrel file
+  (`features/<name>/<name>.dart`). External code may **only** import that.
+- A feature's `src/` is private. The boundary is enforced by
+  `test/architecture/feature_boundary_test.dart` — CI fails if anything
+  imports `features/<x>/src/...` from outside `features/<x>/`.
+- Shared state graduates to `core/`. Owning feature writes; other features read.
+
 ## Removing pieces you don't need
 
-- **Drop auth:** delete `features/auth/`, remove `AuthGate` from `app_router.dart`,
-  remove `authNotifierProvider` reference from `appInitProvider`. Also delete
-  `secureStorageProvider` from `dio_provider.dart` and the auth + refresh
-  interceptors.
+- **Drop auth:** delete `features/auth/` and `core/session/`, remove `AuthGate`
+  from `app_router.dart`, remove `authControllerProvider` reference from
+  `appInitProvider`. Also delete `secureStorageProvider` from `dio_provider.dart`
+  and the auth + refresh interceptors.
 - **Drop PostHog:** remove from `pubspec.yaml`, delete
   `posthog_analytics_service.dart` and `Posthog().setup(...)` from
   `main.dart`. Replace `analyticsProvider` with a no-op implementation of

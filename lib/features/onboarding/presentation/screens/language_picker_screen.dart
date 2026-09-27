@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:app_template/core/l10n/locale_provider.dart';
+import 'package:app_template/core/l10n/locale_notifier.dart';
 import 'package:app_template/core/l10n/supported_locales.dart';
 import 'package:app_template/core/theme/app_spacing.dart';
 import 'package:app_template/core/theme/app_typography.dart';
@@ -61,7 +61,7 @@ class LanguagePickerScreen extends ConsumerWidget {
                       onTap: () {
                         HapticFeedback.selectionClick();
                         ref
-                            .read(localeProvider.notifier)
+                            .read(localeNotifierProvider.notifier)
                             .setLocale(lang.locale);
                       },
                     ),

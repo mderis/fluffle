@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:app_template/features/auth/presentation/providers/auth_notifier.dart';
+import 'package:app_template/core/session/current_user_notifier.dart';
 
 /// Shows [authenticated] when user is logged in, [unauthenticated] otherwise.
 ///
@@ -18,7 +18,7 @@ class AuthGate extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(authNotifierProvider).value;
+    final user = ref.watch(currentUserNotifierProvider);
     return user != null ? authenticated : unauthenticated;
   }
 }

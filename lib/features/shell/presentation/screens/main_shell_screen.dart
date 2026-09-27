@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:app_template/core/router/unsaved_changes_provider.dart';
+import 'package:app_template/core/router/unsaved_changes_notifier.dart';
 import 'package:app_template/core/widgets/app_confirm_dialog.dart';
-import 'package:app_template/features/shell/presentation/providers/scroll_to_top_provider.dart';
+import 'package:app_template/features/shell/presentation/providers/scroll_to_top_signal.dart';
 import 'package:app_template/features/shell/presentation/widgets/main_bottom_nav_bar.dart';
 import 'package:app_template/l10n/app_localizations.dart';
 
@@ -44,7 +44,7 @@ class MainShellScreen extends ConsumerWidget {
   }
 
   Future<bool> _guardUnsavedChanges(BuildContext context, WidgetRef ref) async {
-    if (!ref.read(unsavedChangesProvider)) return true;
+    if (!ref.read(unsavedChangesNotifierProvider)) return true;
 
     final l10n = L10n.of(context);
     final discard = await AppConfirmDialog.show(
@@ -58,7 +58,7 @@ class MainShellScreen extends ConsumerWidget {
     );
 
     if (!discard || !context.mounted) return false;
-    ref.read(unsavedChangesProvider.notifier).clear();
+    ref.read(unsavedChangesNotifierProvider.notifier).clear();
     return true;
   }
 }

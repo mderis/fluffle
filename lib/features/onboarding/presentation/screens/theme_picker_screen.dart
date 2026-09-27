@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:app_template/core/theme/app_spacing.dart';
-import 'package:app_template/core/theme/theme_provider.dart';
+import 'package:app_template/core/theme/theme_mode_notifier.dart';
 import 'package:app_template/l10n/app_localizations.dart';
 
 class ThemePickerScreen extends ConsumerWidget {
@@ -72,7 +72,7 @@ class ThemePickerScreen extends ConsumerWidget {
                       onTap: () {
                         HapticFeedback.selectionClick();
                         ref
-                            .read(themeModeProvider.notifier)
+                            .read(themeModeNotifierProvider.notifier)
                             .setThemeMode(opt.mode);
                       },
                     ),

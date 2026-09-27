@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:app_template/core/l10n/locale_provider.dart';
+import 'package:app_template/core/l10n/locale_notifier.dart';
 import 'package:app_template/core/l10n/supported_locales.dart';
 import 'package:app_template/core/router/app_router.dart';
 import 'package:app_template/core/theme/app_theme.dart';
-import 'package:app_template/core/theme/theme_provider.dart';
+import 'package:app_template/core/theme/theme_mode_notifier.dart';
 import 'package:app_template/l10n/app_localizations.dart';
 
 class App extends ConsumerWidget {
@@ -14,8 +14,8 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(themeModeProvider).value ?? ThemeMode.system;
-    final locale = ref.watch(localeProvider).value;
+    final themeMode = ref.watch(themeModeNotifierProvider).value ?? ThemeMode.system;
+    final locale = ref.watch(localeNotifierProvider).value;
     final router = ref.watch(routerProvider);
 
     return MaterialApp.router(

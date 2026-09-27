@@ -4,7 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import 'package:app_template/core/router/app_routes.dart';
 import 'package:app_template/core/theme/app_spacing.dart';
-import 'package:app_template/features/auth/presentation/providers/auth_notifier.dart';
+import 'package:app_template/core/session/current_user_notifier.dart';
+import 'package:app_template/features/auth/auth.dart';
 import 'package:app_template/l10n/app_localizations.dart';
 
 class ProfileScreen extends ConsumerWidget {
@@ -14,7 +15,7 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final l10n = L10n.of(context);
-    final user = ref.watch(authNotifierProvider).value;
+    final user = ref.watch(currentUserNotifierProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -71,7 +72,8 @@ class ProfileScreen extends ConsumerWidget {
                     l10n.logout,
                     style: const TextStyle(color: Colors.redAccent),
                   ),
-                  onTap: () => ref.read(authNotifierProvider.notifier).logout(),
+                  onTap: () =>
+                      ref.read(authControllerProvider.notifier).logout(),
                 ),
               ],
             ),

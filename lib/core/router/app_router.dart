@@ -4,12 +4,11 @@ import 'package:go_router/go_router.dart';
 
 import 'package:app_template/core/analytics/analytics_provider.dart';
 import 'package:app_template/core/init/app_init_provider.dart';
-import 'package:app_template/core/l10n/locale_provider.dart';
+import 'package:app_template/core/l10n/locale_notifier.dart';
 import 'package:app_template/core/router/app_routes.dart';
-import 'package:app_template/core/theme/theme_provider.dart';
+import 'package:app_template/core/theme/theme_mode_notifier.dart';
 import 'package:app_template/core/widgets/auth_gate.dart';
-import 'package:app_template/features/auth/presentation/screens/login_screen.dart';
-import 'package:app_template/features/auth/presentation/screens/signup_screen.dart';
+import 'package:app_template/features/auth/auth.dart';
 import 'package:app_template/features/home/presentation/screens/home_screen.dart';
 import 'package:app_template/features/onboarding/presentation/screens/language_picker_screen.dart';
 import 'package:app_template/features/onboarding/presentation/screens/splash_screen.dart';
@@ -38,17 +37,17 @@ class RouterNotifier extends ChangeNotifier {
 
   RouterNotifier(this._ref) {
     _ref.listen(appInitProvider, (_, _) => notifyListeners());
-    _ref.listen(localeProvider, (prev, next) {
+    _ref.listen(localeNotifierProvider, (prev, next) {
       if ((prev?.value != null) != (next.value != null)) notifyListeners();
     });
-    _ref.listen(themeModeProvider, (prev, next) {
+    _ref.listen(themeModeNotifierProvider, (prev, next) {
       if ((prev?.value != null) != (next.value != null)) notifyListeners();
     });
   }
 
   bool get isAppReady => !_ref.read(appInitProvider).isLoading;
-  bool get hasChosenLocale => _ref.read(localeProvider).value != null;
-  bool get hasChosenTheme => _ref.read(themeModeProvider).value != null;
+  bool get hasChosenLocale => _ref.read(localeNotifierProvider).value != null;
+  bool get hasChosenTheme => _ref.read(themeModeNotifierProvider).value != null;
 }
 
 /// Friendly screen names for analytics.

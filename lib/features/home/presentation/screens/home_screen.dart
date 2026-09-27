@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:app_template/core/theme/app_spacing.dart';
 import 'package:app_template/core/theme/app_theme.dart';
 import 'package:app_template/core/widgets/pull_to_refresh_haptic.dart';
-import 'package:app_template/features/shell/presentation/providers/scroll_to_top_provider.dart';
+import 'package:app_template/features/shell/presentation/providers/scroll_to_top_signal.dart';
 import 'package:app_template/l10n/app_localizations.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
